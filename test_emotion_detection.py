@@ -1,7 +1,7 @@
 from EmotionDetection.emotion_detection import emotion_detector 
 import unittest
 
-class EmotionDetection (unittest.TestaCase):
+class EmotionDetection (unittest.TestCase):
     def test_emotion_detector(self):
         result_1 = emotion_detector("I am glad this happened")
         dominant_value = result_1.split("'dominant_emotion':")[-1].strip(" '}")
