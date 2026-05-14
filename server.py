@@ -9,6 +9,10 @@ def emotion_analyser(): # Retrieve the text to analyze from the request argument
 
 # Pass the text to the sentiment_analyzer function and store the 
     response = emotion_detector(text_to_analyze)
+    dict_emotions = json.loads(response)
+    for key in dict_emotions: 
+        if dict_emotions[key] is None:
+            return "Invalid input! Try again."
 # Extract the dominant value 
     response = response.strip("{}")
     response = response.replace("'sadness'", "and 'sadness'")

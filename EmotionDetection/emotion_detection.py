@@ -10,8 +10,16 @@ def emotion_detector(text_to_analyse): # Define a function named emotion_detecto
     formatted_response = json.loads(response.text)
     emotions = formatted_response['emotionPredictions'][0]
     emotions_output = emotions['emotion']
-    emotion_high_score = max(emotions['emotion'].values())
-    emotion_high = max(emotions['emotion'],key = emotions['emotion'].get)
-    emotions_output['dominant_emotion'] = emotion_high
+    if response.status_code == 200:
+        emotion_high_score = max(emotions['emotion'].values())
+        emotion_high = max(emotions['emotion'],key = emotions['emotion'].get)
+        emotions_output['dominant_emotion'] = emotion_high
+    elif response.status_code == 400:
+        # dict_emotions = json.loads(emotions_output)
+        for key in emotions_output:
+            emotions_output[key] = None
+    else:
+        for key in emotions_output:
+            emotions_output[key] = None
     return str(emotions_output) # Return the response text from the API
     
